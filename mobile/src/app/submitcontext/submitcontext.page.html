@@ -1,0 +1,66 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-button (click)="goback()" fill="clear" color="secondary">
+            <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        </ion-button>
+        <ion-title>审核用户提交内容</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div>
+        <ion-list>
+            <ion-item>
+                <h4>任务标题：{{detail.title}}</h4>
+            </ion-item>
+            <ion-item lines="none">提交任务内容用户：</ion-item>
+            <ion-item>
+                <ion-avatar slot="start">
+                    <img src="assets/img/1.png" />
+                </ion-avatar>
+                <ion-label class="ion-padding-horizontal">Id: {{detail.uId}} </ion-label>
+                <ion-label>用户名：{{detail.uName}}</ion-label>
+            </ion-item>
+            <ion-item lines="none">
+                <ion-label>提交文字说明：</ion-label>
+            </ion-item>
+            <ion-item>
+                <p>{{detail.context}}</p>
+            </ion-item>
+            <ion-item lines="none">
+                <ion-label>提交截图内容：</ion-label>
+            </ion-item>
+            <ion-item class="ion-padding">
+                <img src="{{detail.shorcut}}" alt="截图">
+            </ion-item>
+        </ion-list>
+    </div>
+
+    <div *ngIf="verification" style="text-align: center;margin-bottom: 50px;">
+        <ion-button (click)="pass()" color="light" class="ion-margin-horizontal">
+            通过
+        </ion-button>
+        <ion-button (click)="not()" color="light" class="ion-margin-horizontal">
+            拒绝
+        </ion-button>
+    </div>
+
+    <div *ngIf="yes" style="margin-bottom: 50px;">
+        <ion-list>
+            <ion-item>
+                <p>审核状态：已通过</p>
+            </ion-item>
+            <ion-item>
+                <p style="color: rgb(235, 69, 39);">瓜分金额：{{detail.redpack}}</p>
+            </ion-item>
+        </ion-list>
+    </div>
+
+    <div *ngIf="no" style="margin-bottom: 50px;">
+        <ion-list>
+            <ion-item>
+                <p>审核状态：已拒绝</p>
+            </ion-item>
+        </ion-list>
+    </div>
+</ion-content>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="img/logo.ico">
+    <title>后台管理充值审核</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/base.css">
+</head>
+
+<body class="sidebar-fixed header-fixed">
+    <div class="page-wrapper">
+        <!-- 顶部 -->
+        <nav class="navbar page-header">
+            <div>
+                <a class="navbar-brand" href="http://localhost:3000">
+                    <img src="img/logo.png" width="30px" height="30px" alt="logo" style="float: left;margin-top: 8px;margin-right: 10px;">
+                    <h1>红包任务平台后台管理</h1>
+                </a>
+            </div>
+            <a class="nav-link" href="http://localhost:3000/login">
+                <img src="img/avatar-1.png" class="avatar avatar-sm" alt="logo">
+                <span class="small">admin：123</span>
+            </a>
+        </nav>
+
+        <nav class="main-container">
+            <!-- 边栏部分 -->
+            <div class="sidebar">
+                <ul class="nav">
+                    <li class="nav-title">管理内容栏</li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000" class="nav-link">
+                        用户管理
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/task" class="nav-link">
+                        任务管理
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/out" class="nav-link">
+                        提现审核
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/in" class="nav-link active">
+                        充值审核
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/myinfo" class="nav-link">
+                        个人中心
+                    </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 内容部分 -->
+            <div class="content">
+                <div class="card">
+                    <h3 style="margin:10px 10px !important">用户充值申请表：</h3>
+                    <table class="gridtable">
+                        <tr>
+                            <th>用户id：</th>
+                            <th>用户名：</th>
+                            <th>充值金额（元）：</th>
+                            <th>充值时间：</th>
+                            <th class="op">操作：</th>
+                        </tr>
+                        <%
+                            for(let i=0;i < res.length;i++){
+                                %>
+                            <tr>
+                                <td>
+                                    <%=res[i].uId%>
+                                </td>
+                                <td>
+                                    <%=res[i].user.uName%>
+                                </td>
+                                <td>
+                                    <%=res[i].money%>
+                                </td>
+                                <td>
+                                    <%=moment(res[i].time).format("YYYY-MM-DD hh:mm")%>
+                                </td>
+                                <%if(res[i].state == '未审核'){%>
+                                    <td>
+                                        <a href="javascript:pass(<%=res[i].id%>)" style="color: rgb(99, 214, 223);">[同意]</a>
+                                        <br>
+                                        <a href="javascript:not(<%=res[i].id%>)" style="color: rgb(99, 214, 223);">[拒绝]</a>
+                                    </td>
+                                    <% } else { %>
+                                        <td>
+                                            <%='已'+res[i].state%>
+                                        </td>
+                                        <% } %>
+                            </tr>
+                            <%
+                            }
+                        %>
+                    </table>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <script src="javascripts/jquery.min.js"></script>
+    <script>
+        function pass(id) {
+            $.ajax({
+                url: 'http://localhost:3000/verify/pass/' + id,
+                success: function(res) {
+                    console.log(res)
+                    if (res.code = 3) {
+                        alert(res.message);
+                        location.reload();
+                    } else {
+                        alert('操作失败')
+                    }
+                }
+            })
+        }
+
+        function not(id) {
+            $.ajax({
+                url: 'http://localhost:3000/verify/not/' + id,
+                success: function(res) {
+                    console.log(res)
+                    if (res.code = 4) {
+                        alert(res.responseData.message);
+                        location.reload();
+                    } else {
+                        alert('操作失败')
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

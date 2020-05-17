@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-button (click)="goback()" fill="clear" color="secondary">
+            <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        </ion-button>
+        <ion-title>我的任务列表</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-segment [(ngModel)]="tasklist">
+        <ion-segment-button value="released">
+            <strong>已发布</strong>
+        </ion-segment-button>
+        <ion-segment-button value="draft">
+            <strong>草稿箱</strong>
+        </ion-segment-button>
+    </ion-segment>
+    <div [ngSwitch]="tasklist">
+        <div *ngSwitchCase="'released'">
+            <ion-list>
+                <ion-item *ngFor="let task1 of released" [routerLink]="['/submitlist', task1.id]" routerLinkActive="router-link-active">
+                    <ion-thumbnail style="margin:10px 5px;">
+                        <img src="{{task1.cover}}" />
+                    </ion-thumbnail>
+                    <ion-label>{{task1.title}}</ion-label>
+                </ion-item>
+            </ion-list>
+        </div>
+
+        <!-- 草稿箱 -->
+        <div *ngSwitchCase="'draft'">
+            <ion-list>
+                <ion-item *ngFor="let task2 of draft" [routerLink]="['/draft', task2.id]" routerLinkActive="router-link-active">
+                    <ion-thumbnail style="margin:10px 5px;">
+                        <img src="{{task2.cover}}" />
+                    </ion-thumbnail>
+                    <ion-label>{{task2.title}}</ion-label>
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+
+
+</ion-content>

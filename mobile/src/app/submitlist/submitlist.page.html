@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-button (click)="goback()" fill="clear" color="secondary">
+            <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        </ion-button>
+        <ion-title>已提交用户列表</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let item of userlist" [routerLink]="['/submitcontext',item.id]" routerLinkActive="router-link-active">
+            <ion-avatar slot="start">
+                <img src="assets/img/1.png" />
+            </ion-avatar>
+            <ion-label>Id：{{item.uId}} 用户名：{{item.user.uName}}</ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

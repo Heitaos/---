@@ -1,0 +1,75 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-button (click)="goback()" fill="clear" color="secondary">
+            <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        </ion-button>
+        <ion-title>红包余额</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!-- 余额 -->
+    <div class="balance" style="margin: 10px; font-size: 40px;text-align: center;line-height: 30px;">
+        <p>你的余额:</p>
+        <p>¥ {{balance}}</p>
+    </div>
+    <div style="text-align: center;">
+        <ion-button (click)="out()" color="light" class="ion-margin-horizontal">
+            提现
+        </ion-button>
+        <ion-button (click)="in()" color="light" class="ion-margin-horizontal">
+            充值
+        </ion-button>
+    </div>
+    <div class="ion-padding">
+        <div class="ion-text-center">
+            <p>tip:充值金额转到下面二维码</p>
+            <img src="assets/img/ewm.jpg" alt="" style="width: 100px;">
+        </div>
+    </div>
+
+    <ion-list>
+        <ion-item-divider>
+            <ion-label>余额记录：</ion-label>
+        </ion-item-divider>
+        <ion-item>
+
+        </ion-item>
+        <ng-container *ngFor="let item of record">
+            <ion-item *ngIf="item.operation==='发布任务'">
+                <div style="margin:5px 5px;">{{item.operation}} ：
+                    <div> -{{item.money}}元</div>
+                </div>
+                <ion-label slot="end">
+                    <p>时间：{{item.time | date: 'yyyy-MM-dd hh:mm'}} </p>
+                </ion-label>
+            </ion-item>
+            <ion-item *ngIf="item.operation==='提现'">
+                <div style="margin:5px 5px;">{{item.operation}} ：
+                    <div> -{{item.money}}元</div>
+                </div>
+                <ion-label slot="end">
+                    <p style="color:  #3dc2ff;;">状态：{{item.state}}</p>
+                    <p>时间：{{item.time | date: 'yyyy-MM-dd hh:mm'}} </p>
+                </ion-label>
+            </ion-item>
+            <ion-item *ngIf="item.operation==='完成任务'">
+                <div style="margin:5px 5px;">{{item.operation}} ：
+                    <div> +{{item.money}}元</div>
+                </div>
+                <ion-label slot="end">
+                    <p>时间：{{item.time | date: 'yyyy-MM-dd hh:mm'}} </p>
+                </ion-label>
+            </ion-item>
+            <ion-item *ngIf="item.operation==='充值'">
+                <div style="margin:5px 5px;">{{item.operation}} ：
+                    <div> +{{item.money}}元</div>
+                </div>
+                <ion-label slot="end">
+                    <p style="color:  #3dc2ff;;">状态：{{item.state}}</p>
+                    <p>时间：{{item.time | date: 'yyyy-MM-dd hh:mm'}} </p>
+                </ion-label>
+            </ion-item>
+        </ng-container>
+    </ion-list>
+</ion-content>

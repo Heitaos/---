@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-button (click)="goback()" fill="clear" color="secondary">
+            <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        </ion-button>
+        <ion-title>我已完成的任务</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-segment [(ngModel)]="state">
+        <ion-segment-button value="pass">
+            <strong>已通过</strong>
+        </ion-segment-button>
+        <ion-segment-button value="verifing">
+            <strong>审核中</strong>
+        </ion-segment-button>
+        <ion-segment-button value="no">
+            <strong>未通过</strong>
+        </ion-segment-button>
+    </ion-segment>
+    <div [ngSwitch]="state">
+        <div *ngSwitchCase="'pass'">
+            <ion-list>
+                <ion-item *ngFor="let item1 of pass">
+                    <ion-thumbnail>
+                        <img src="{{item1.task.cover}}" />
+                    </ion-thumbnail>
+                    <ion-label class="ion-margin">
+                        <h1>标题：{{item1.task.title}}</h1>
+                        <h2 style="color: rgb(235, 69, 39);">获得红包：{{item1.redpack}}元</h2>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </div>
+        <div *ngSwitchCase="'verifing'">
+            <ion-list>
+                <ion-item *ngFor="let item2 of veri">
+                    <ion-thumbnail>
+                        <img src="{{item2.task.cover}}" />
+                    </ion-thumbnail>
+                    <ion-label class="ion-margin ">
+                        <h1>标题：{{item2.task.title}}</h1>
+                        <p>请耐心等待，审核中。。。</p>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </div>
+        <div *ngSwitchCase=" 'no' ">
+            <ion-item *ngFor="let item3 of not ">
+                <ion-thumbnail>
+                    <img src="{{item3.task.cover}}" />
+                </ion-thumbnail>
+                <ion-label class="ion-margin ">
+                    <h1>标题：{{item3.task.title}}</h1>
+                    <p>很遗憾，未通过</p>
+                </ion-label>
+            </ion-item>
+        </div>
+    </div>
+
+</ion-content>

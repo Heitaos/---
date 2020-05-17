@@ -1,0 +1,9 @@
+{
+    "name": "mobile",
+    "integrations": {},
+    "type": "angular",
+    "proxies": [{
+        "path": "/apis",
+        "proxyUrl": "http://localhost:3000"
+    }]
+}

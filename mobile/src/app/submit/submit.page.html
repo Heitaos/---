@@ -1,0 +1,80 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-button (click)="goback()" fill="clear" color="secondary">
+            <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        </ion-button>
+        <ion-title>提交任务内容</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item-divider>
+            <ion-label> 该任务详情介绍</ion-label>
+        </ion-item-divider>
+        <ion-item lines="none">任务发布者：</ion-item>
+        <ion-item>
+            <ion-avatar slot="start">
+                <img src="assets/img/1.png" />
+            </ion-avatar>
+            <ion-label class="ion-padding-horizontal">Id:{{task.uId}} </ion-label>
+            <ion-label>用户名：{{task.uName}}</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+            <h4>任务标题：{{task.title}}</h4>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                <p> 发布时间：{{task.time | date: 'yyyy-MM-dd hh:mm'}} </p>
+            </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-label>任务封面：</ion-label>
+        </ion-item>
+        <ion-item>
+            <img src="{{task.cover}}" alt="" class="ion-padding">
+        </ion-item>
+        <ion-item>
+            <ion-label>总红包赏金：</ion-label>
+            <h3>￥{{task.money}}</h3>
+        </ion-item>
+        <ion-item>
+            <ion-label>瓜分模式：</ion-label>
+            <h4>{{task.model}}</h4>
+        </ion-item>
+        <ion-item>
+            <ion-label>人数（已参加人数/上限）：</ion-label>
+            <h4>{{task.doneNum}}/{{task.people}}</h4>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-label>任务详情：</ion-label>
+        </ion-item>
+        <ion-item>
+            <p>{{task.context}}</p>
+        </ion-item>
+    </ion-list>
+    <ion-list class="ion-padding-top">
+        <ion-item-divider>
+            <ion-label> 请按发布者的要求提交你的任务内容</ion-label>
+        </ion-item-divider>
+        <ion-item lines="none">
+            <ion-label>提交文字内容：</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-textarea [(ngModel)]="submitcontext.context" contenteditable="true" placeholder="没有可不填" rows="5"></ion-textarea>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-label>提交任务截图（没有要求可不提交）：</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-input (change)="getPicture($event)" type="file" accept="image/*" capture="camera" style="height: 100px; position: absolute;z-index:1;opacity: 0;"></ion-input>
+            <img src="{{submitcontext.shotcut}}" alt="上传截图" id="img" style="width: 100px;margin: 10px; text-align: center;">
+        </ion-item>
+    </ion-list>
+
+    <div class="ion-margin" style="margin:50px 10px;">
+        <ion-button (click)="submit() " expand="block " color="light ">
+            提交
+        </ion-button>
+    </div>
+</ion-content>

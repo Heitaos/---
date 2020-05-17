@@ -1,0 +1,95 @@
+<!-- 头部 -->
+<ion-header collapse="condense" (click)="top()">
+    <ion-toolbar color="secondary">
+        <ion-title size="large" class="ion-text-center">
+            <img src="assets/icon/logo.png" alt="logo" style="height: 25px;width: auto;"> 红包任务平台
+        </ion-title>
+        <ion-button (click)="test()" fill="clear" slot="end" color="light">
+            <ion-icon name="person-add-outline"></ion-icon>
+        </ion-button>
+    </ion-toolbar>
+</ion-header>
+<!-- 内容 -->
+<ion-content #content [fullscreen]="true" class="has-header">
+    <!-- 搜索栏 -->
+    <ion-searchbar [(ngModel)]="searchContext" (keyup)='search(searchContext)' showCancelButton="focus" placeholder="输入搜索关键字" cancel-button-text=取消></ion-searchbar>
+    <div *ngIf="!(searchContext === '')">
+        <ion-list>
+            <ion-item *ngIf="searchResult.length === 0">
+                <ion-label>无搜索结果</ion-label>
+            </ion-item>
+            <ion-item *ngFor="let item of searchResult" [routerLink]="['/submit', item.id]" (click)="rehot(item.id,item.hot)">
+                <ion-thumbnail>
+                    <img src="{{item.cover}}" />
+                </ion-thumbnail>
+                <ion-label class="ion-margin">
+                    <h1 style="color:rgb(235, 69, 39); font-weight: 600;">瓜分金额：￥{{item.money}} </h1>
+                    <h2>标题：{{item.title}} </h2>
+                    <p> 发布时间：{{item.time | date: 'yyyy-MM-dd hh:mm'}} </p>
+                    <p>点击量: {{item.hot}} </p>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </div>
+    <div *ngIf="searchContext === ''">
+        <!-- 轮播图 -->
+        <ion-slides #slide pager="true" [options]="slideOpts" (ionSlideTouchEnd)="continue()">
+            <ion-slide>
+                <img src="assets/img/lb1.jpg" alt="轮播图1">
+            </ion-slide>
+            <ion-slide>
+                <img src="assets/img/lb2.jpg" alt="轮播图2">
+            </ion-slide>
+            <ion-slide>
+                <img src="assets/img/lb3.jpg" alt="轮播图3">
+            </ion-slide>
+        </ion-slides>
+        <!-- 任务表分类 -->
+        <p style="color: #3dc2ff;font-size: medium;font-weight: 600;margin-left: -180px;"> 每天精彩部分！！！</p>
+        <ion-segment [(ngModel)]="taskModel">
+            <ion-segment-button value="hot">
+                <ion-icon name="pulse-outline"></ion-icon>
+                <strong>最受欢迎</strong>
+            </ion-segment-button>
+            <ion-segment-button value="time">
+                <ion-icon name="time-outline"></ion-icon>
+                <strong>最新发布</strong>
+            </ion-segment-button>
+        </ion-segment>
+
+        <div [ngSwitch]="taskModel">
+            <div *ngSwitchCase="'hot'">
+                <!-- 按热度 -->
+                <ion-list>
+                    <ion-item *ngFor="let task1 of hotlist" [routerLink]="['/submit', task1.id]" (click)="rehot(task1.id,task1.hot)">
+                        <ion-thumbnail>
+                            <img src="{{task1.cover}}" />
+                        </ion-thumbnail>
+                        <ion-label class="ion-margin">
+                            <h1 style="color:rgb(235, 69, 39); font-weight: 600;">瓜分金额：￥{{task1.money}} </h1>
+                            <h2>标题：{{task1.title}} </h2>
+                            <p>点击量: {{task1.hot}} </p>
+                            <p> 发布时间：{{task1.time | date: 'yyyy-MM-dd hh:mm'}} </p>
+                        </ion-label>
+                    </ion-item>
+                </ion-list>
+            </div>
+            <!-- 按时间 -->
+            <div *ngSwitchCase="'time'">
+                <ion-list>
+                    <ion-item *ngFor="let task2 of timelist" [routerLink]="['/submit', task2.id]" (click)="rehot(task2.id,task2.hot)">
+                        <ion-thumbnail>
+                            <img src="{{task2.cover}}" />
+                        </ion-thumbnail>
+                        <ion-label class="ion-margin">
+                            <h1 style="color:rgb(235, 69, 39); font-weight: 600;">瓜分金额：￥{{task2.money}} </h1>
+                            <h2>标题：{{task2.title}} </h2>
+                            <p> 发布时间：{{task2.time | date: 'yyyy-MM-dd hh:mm'}} </p>
+                            <p>点击量: {{task2.hot}} </p>
+                        </ion-label>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+    </div>
+</ion-content>

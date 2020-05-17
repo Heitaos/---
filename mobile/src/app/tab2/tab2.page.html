@@ -1,0 +1,49 @@
+<ion-header collapse="condense">
+    <ion-toolbar color="secondary">
+        <ion-title size="large" class="ion-text-center"> 发布任务</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content #content [fullscreen]="true">
+    <ion-list class="ion-padding-top">
+        <ion-item>
+            <ion-label>任务标题：</ion-label>
+            <ion-input type="text" placeholder="1~15个字符" [(ngModel)]="task.title"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-label>任务封面：</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-input (change)="getPicture($event)" type="file" accept="image/*" capture="camera" style="line-height:100px; position: absolute;z-index:1; opacity: 0;"></ion-input>
+            <img [src]="task.cover" alt="任务封面" id="img" style="width: 100px; margin-left: 100px; margin-bottom: 5px;">
+        </ion-item>
+        <ion-item>
+            <ion-label>红包金额：￥</ion-label>
+            <ion-input type="number" placeholder="0.00" [(ngModel)]="task.money"></ion-input>
+            元
+        </ion-item>
+        <ion-item>
+            <ion-label>规定人数：</ion-label>
+            <ion-input type="number" placeholder="输入整数" [(ngModel)]="task.people"></ion-input>
+            人
+        </ion-item>
+        <ion-item>
+            <ion-checkbox color="secondary" checked="task.model" [(ngModel)]="task.model"></ion-checkbox>
+            <ion-label>红包模式（任务赏金随机分配）</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-label>任务细节描述：</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-textarea contenteditable="true" placeholder="输入操作步骤" rows="11" [(ngModel)]="task.context"></ion-textarea>
+        </ion-item>
+    </ion-list>
+    <div class="ion-padding ">
+        <ion-button (click)="release() " expand="block " color="light " style="margin-bottom: 10px;">
+            发布
+        </ion-button>
+        <ion-button (click)="save() " expand="block " color="light " style="margin-bottom: 50px;">
+            保存草稿
+        </ion-button>
+    </div>
+
+</ion-content>

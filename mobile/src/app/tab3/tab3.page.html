@@ -1,0 +1,60 @@
+<ion-header collapse="condense">
+    <ion-toolbar color="secondary">
+        <ion-title size="large" class="ion-text-center"> 个人中心</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" class="has-header">
+    <!-- 用户信息 -->
+    <ion-list>
+        <ion-item-divider>
+            <ion-label>用户信息</ion-label>
+        </ion-item-divider>
+        <ion-item>
+            <ion-input (change)="getPicture($event)" type="file" accept="image/*" capture="camera" placeholder="上传图片" style="height: auto; position: absolute;z-index:1;opacity: 0;"></ion-input>
+            <ion-label>头像:</ion-label>
+            <ion-avatar slot="end">
+                <img [src]="newUser.photo" />
+            </ion-avatar>
+        </ion-item>
+        <ion-item>Id:
+            <ion-label class="ion-text-right">{{user.id}}</ion-label>
+        </ion-item>
+        <ion-item> 用户名:
+            <ion-label class="ion-text-right">{{user.uName}}</ion-label>
+        </ion-item>
+    </ion-list>
+    <!-- 任务信息 -->
+    <ion-list>
+        <ion-item-divider>
+            <ion-label>任务信息</ion-label>
+        </ion-item-divider>
+        <br>
+        <ion-item [routerLink]="['/tasklist']" routerLinkActive="router-link-active">
+            <ion-icon slot="start" name="clipboard-outline"></ion-icon>
+            <ion-label>我的任务列表</ion-label>
+        </ion-item>
+        <ion-item [routerLink]="['/done']" routerLinkActive="router-link-active">
+            <ion-icon slot="start" name="checkmark-done-outline"></ion-icon>
+            <ion-label>我已完成的任务</ion-label>
+        </ion-item>
+        <ion-item [routerLink]="['/money']" routerLinkActive="router-link-active">
+            <ion-icon slot="start" name="wallet" color="danger"></ion-icon>
+            <ion-label>我的红包</ion-label>
+        </ion-item>
+    </ion-list>
+    <div class="ion-margin">
+        <ion-button (click)="signout()" expand="block" color="light" style="margin-top: 50px;margin-bottom: 10px;">
+            退出登陆
+        </ion-button>
+        <ion-button (click)="changeinfo()" expand="block" color="light">
+            修改信息
+        </ion-button>
+    </div>
+    <!--补充-->
+    <div id="ps" class="ion-text-center">
+        <p>广药信工</p>
+        <p>2020 @GDPUcopyright</p>
+    </div>
+</ion-content>

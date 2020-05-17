@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>用户登陆</ion-title>
+        <ion-button (click)="dismiss()" fill="clear" slot="end" color="light">
+            <ion-icon slot="icon-only" name="close-circle-outline" slot="end" color="secondary"></ion-icon>
+        </ion-button>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list style="margin-top: 50px;">
+        <ion-item>
+            <ion-label>用 户 名：</ion-label>
+            <ion-input type="text" placeholder="2~6个字符" [(ngModel)]="user.uName"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>用户密码：</ion-label>
+            <ion-input type="password" placeholder="6~16个字符" [(ngModel)]="user.password"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-checkbox color="secondary" checked="remember" [(ngModel)]="remember"></ion-checkbox>
+            <ion-label>
+                记住密码(有效期7天)
+            </ion-label>
+        </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+
+        <ion-button (click)="login()" expand="block" color="secondary">
+            登陆
+        </ion-button>
+    </div>
+    <div class="ion-padding ion-text-center">
+        <ion-button (click)="showRegist()" color="light" size="small">
+            没有账号？
+            <p style="color: #3dc2ff;">注册</p>
+        </ion-button>
+    </div>
+
+    <!-- {{ user | json }} -->
+</ion-content>

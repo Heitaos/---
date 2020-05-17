@@ -1,0 +1,46 @@
+/* 表格样式 */
+
+table.gridtable {
+    margin: 10px 20px;
+    font-family: verdana, arial, sans-serif;
+    font-size: 16px;
+    color: #333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+    border-radius: 5px;
+}
+
+table.gridtable th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+}
+
+table.gridtable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+table.gridtable td.context {
+    font-size: 11px;
+}
+
+table.gridtable th.op {
+    width: 100px;
+}
+
+table img {
+    width: 100px;
+    height: auto;
+}
+
+#hide {
+    visibility: hidden;
+}

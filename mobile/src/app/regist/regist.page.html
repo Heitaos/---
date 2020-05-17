@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-button (click)="goback()" fill="clear" color="secondary">
+            <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        </ion-button>
+        <ion-title>欢迎加入会员！！！</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list style="margin-top: 50px;">
+        <ion-item>
+            <ion-label>用 户 名：</ion-label>
+            <ion-input type="text" placeholder="2~6个字符" [(ngModel)]="user.uName"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>用户密码：</ion-label>
+            <ion-input type="password" placeholder="6~16个字符" [(ngModel)]="password1"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>再次确认密码：</ion-label>
+            <ion-input type="password" placeholder="6~16个字符" [(ngModel)]="password2"></ion-input>
+        </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+        <ion-button (click)="registpro()" expand="block" color="secondary">
+            注册
+        </ion-button>
+    </div>
+    <!-- {{ user | json }} -->
+</ion-content>
